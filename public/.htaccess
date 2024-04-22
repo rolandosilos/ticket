@@ -32,7 +32,6 @@
 #    Deny from all
 #</FilesMatch>
 
-
-#custom
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+# Uncomment to redirect www subdomain to naked domain
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
