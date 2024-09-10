@@ -86,9 +86,11 @@ class="nav-item active"
                         <th>
                             {!! Lang::get('lang.ticket_id') !!}
                         </th>
+                        <th>Department</th>
                         <th>
                             {!! Lang::get('lang.priority') !!}
                         </th>
+                        <th>Is Answered</th>
                         <th>
                             {!! Lang::get('lang.last_replier') !!}
                         </th>
@@ -134,9 +136,11 @@ class="nav-item active"
                                 ?>
                                 <td class="mailbox-name"><a href="{!! URL('check_ticket',[Crypt::encrypt($ticket->id)]) !!}" title="{!! $title->title !!}">{{$string}}   </a> ({!! $count!!}) <i class="fas fa-comment"></i></td>
                                 <td class="mailbox-Id">#{!! $ticket->ticket_number !!}</td>
+                                <?php $dept = App\Model\helpdesk\Agent\Department::where('id', '=', $ticket->dept_id)->first(); ?>
+                                <td><spam>{{$dept->name}}</spam></td>
                                 <?php $priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('priority_id', '=', $ticket->priority_id)->first(); ?>
                                 <td class="mailbox-priority"><spam>{{$priority->priority}}</spam></td>
-
+                                <td><spam>{{($ticket->isanswered == 1) ? "Yes" : "No"}}</spam></td>
                         <td class="mailbox-last-reply" style="color: {!! $rep !!}">{!! $username !!}</td>
                         <?php $updated = $title->updated_at ?>
                         <td class="mailbox-last-activity">{!! UTC::usertimezone($updated) !!}</td>
@@ -176,9 +180,11 @@ class="nav-item active"
                         <th>
                             {!! Lang::get('lang.ticket_id') !!}
                         </th>
+                        <th>Department</th>
                         <th>
                             {!! Lang::get('lang.priority') !!}
                         </th>
+                        <th>Is Answered</th>
                         <th>
                             {!! Lang::get('lang.last_replier') !!}
                         </th>
@@ -222,8 +228,11 @@ class="nav-item active"
                                 ?>
                                 <td class="mailbox-name"><a href="{!! URL('check_ticket',[Crypt::encrypt($ticket->id)]) !!}" title="{!! $title->title !!}">{{$string}}   </a> ({!! $count!!}) <i class="fas fa-comment"></i></td>
                                 <td class="mailbox-Id">#{!! $ticket->ticket_number !!}</td>
+                                <?php $dept = App\Model\helpdesk\Agent\Department::where('id', '=', $ticket->dept_id)->first(); ?>
+                                <td><spam>{{$dept->name}}</spam></td>
                                 <?php $priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('priority_id', '=', $ticket->priority_id)->first(); ?>
                                 <td class="mailbox-priority"><spam>{{$priority->priority}}</spam></td>
+                                <td><spam>{{($ticket->isanswered == 1) ? "Yes" : "No"}}</spam></td>
                         <td class="mailbox-last-reply" style="color: {!! $rep !!}">{!! $username !!}</td>
                         <td class="mailbox-last-activity">{!! $title->updated_at !!}</td>
                         <?php $status = App\Model\helpdesk\Ticket\Ticket_Status::where('id', '=', $ticket->status)->first(); ?>
