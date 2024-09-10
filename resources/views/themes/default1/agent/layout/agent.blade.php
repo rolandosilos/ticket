@@ -600,10 +600,7 @@
                       <div class="col-sm-6">
                         <h1 class="m-0 text-dark">@yield('PageHeader')</h1>
                       </div><!-- /.col -->
-                      <div class="col-sm-6">
-
-                        {!! Breadcrumbs::render() !!}
-                      </div><!-- /.col -->
+                      <div class="col-sm-6"></div><!-- /.col -->
                     </div><!-- /.row -->
                   </div><!-- /.container-fluid -->
                 </div>
