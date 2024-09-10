@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
 use Queue;
 use URL;
+use Illuminate\Database\Schema\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,7 +41,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Route::singularResourceParameters(false);
         $this->composer();
-        URL::forceScheme('https');
+        // URL::forceScheme('https');
+
+        Builder::defaultStringLength(191);
     }
 
     public function composer()
