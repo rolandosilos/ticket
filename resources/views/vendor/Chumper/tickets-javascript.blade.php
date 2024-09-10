@@ -113,6 +113,8 @@ $path = public_path();
                     {data: "c_uname"},
                     {data: "a_uname"},
                     {data: "updated_at"},
+                    {data: "priority"},
+                    {data: "dept"},
                 ],
                 "fnCreatedRow": function (nRow, aData, iDataIndex) {
                     var str = aData['id'];

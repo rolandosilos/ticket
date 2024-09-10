@@ -2715,7 +2715,9 @@ class TicketController extends Controller
                 Lang::get('lang.ticket_id'),
                 Lang::get('lang.from'),
                 Lang::get('lang.assigned_to'),
-                Lang::get('lang.last_activity')
+                Lang::get('lang.last_activity'),
+                "Priority",
+                "Department"
             )->noScript();
     }
 
@@ -2848,7 +2850,38 @@ class TicketController extends Controller
 
                             return '<span style="display:none">'.$updated.'</span>'.UTC::usertimezone($updated);
                         })
-                        ->rawColumns(['id', 'title', 'ticket_number', 'c_uname', 'a_uname', 'updated_at'])
+                        ->editColumn('priority', function ($tickets) {
+                            $priority = "--";
+                            if ($tickets->priority !== null) {
+                                $priority = $tickets->priority;
+                            }
+                            $priorityColor = "";
+                            switch($priority){
+                                case 'Emergency':
+                                    $priorityColor = "red";
+                                    break;
+                                case 'High':
+                                    $priorityColor = "orange";
+                                    break;
+                                case 'Normal':
+                                    $priorityColor = "green";
+                                    break;
+                                case "Low":
+                                    $priorityColor = "blue";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return '<span style="color: '.$priorityColor.';">'.$priority.'</span>';
+                        })
+                        ->editColumn('dept', function ($tickets) {
+                            $department = "N/A";
+                            if ($tickets->last_replier !== null) {
+                                $department = ucfirst($tickets->last_replier);
+                            }
+                            return '<span>'.$department.'</span>';
+                        })
+                        ->rawColumns(['id', 'title', 'ticket_number', 'c_uname', 'a_uname', 'updated_at', 'priority', 'dept'])
                         ->make();
     }
 
